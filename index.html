@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MFS Mom Jokes (AlpineJS)</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+  </head>
+  <body>
+    <article
+      id="mom-jokes"
+      x-data="jokeComponent()"
+      x-init="makeRandomNumber()"
+      x-on:keydown.enter.window="makeRandomNumber()"
+    >
+      <h4>Mother's Day Jokes</h4>
+      <button @click="makeRandomNumber()">Get Another Joke</button>
+      <div>
+        <p x-text="jokes[jokeIndex].q"></p>
+        <p><em x-text="jokes[jokeIndex].a"></em></p>
+      </div>
+    </article>
+    <script src="momJokes.js"></script>
+    <script>
+      function jokeComponent() {
+        return {
+          jokeIndex: 0,
+          makeRandomNumber() {
+            this.jokeIndex = Math.floor(Math.random() * jokes.length);
+          },
+        };
+      }
+    </script>
+  </body>
+</html>
